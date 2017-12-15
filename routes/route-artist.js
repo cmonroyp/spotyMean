@@ -11,5 +11,7 @@ var api = express.Router();
 api.get('/artist',md_auth.ensureAuth,ArtistController.getArtist);
 api.get('/artistId/:id',md_auth.ensureAuth,ArtistController.getArtistId);
 api.post('/save-artist',md_auth.ensureAuth,ArtistController.saveArtist);
+api.get('/artists/:page?',md_auth.ensureAuth,ArtistController.getArtists);
+api.put('/update-artist/:id',md_auth.ensureAuth,ArtistController.updateArtist);
 
 module.exports = api;
