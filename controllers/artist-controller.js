@@ -22,7 +22,7 @@ function getArtists(req,res){
     //     var page = 1;
     // }
     var page = req.params.page || 1;//en caso que no venga la pagina muestra la primera.
-    var itemPerPage = 3;
+    var itemPerPage = 3;//registros que se mostrara por pagina.
 
     Artist.find().sort('name').paginate(page,itemPerPage,function(err,artists,total){
 
@@ -98,7 +98,7 @@ function updateArtist(req,res){
         else{
 
             if(!updateArtist){
-                res.status(404).send({message:'Artista no Encontrado y no Actualizado!.'});
+                res.status(404).send({message:'Artista no encontrado y no Actualizado!.'});
             }
             else{
                 res.status(200).send({artistUpdate:updateArtist});
@@ -107,10 +107,121 @@ function updateArtist(req,res){
     })
 }
 
+function deleteArtist(req,res){
+
+    var artistId = req.params.id;
+    Artist.findByIdAndRemove(artistId,(err,artistRemoved)=>{
+
+        if(err){
+            res.status(500).send({message:'Error eliminando el Artista!.'});
+        }
+        else{
+            if(!artistRemoved){
+                res.status(404).send({message:'Artista no encontrado y no Eliminado!.'});
+            }
+            else{
+                //removemos los albunes asociados al artista.
+                Artist.find({artist:artistRemoved._id}).remove((err,albumRemoved)=>{
+                    if(err){
+                        res.status(500).send({message:'Error eliminando el album asociado al artista!.'});
+                    }
+                    else{
+                        if(!albumRemoved){
+                            res.status(404).send({message:'Album no encontrado y no Eliminado!.'});
+                        }
+                        else{
+                            //removemos las canciones asociadas al album.
+                            Song.find({album:albumRemoved._id}).remove((err,songRemoved)=>{
+                                if(err){
+                                    res.status(500).send({message:'Error eliminando la cancion asociado al album!.'});
+                                }
+                                else{
+                                    if(!songRemoved){
+                                        res.status(404).send({message:'cancion no encontrado y no Eliminada!.'});
+                                    }
+                                    else{
+                                        res.status(200).send({artist:artistRemoved});
+                                    }
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    })
+}
+
+function uploadImagesArtist(req,res){
+
+    var artistId = req.params.id;
+    var file_name = 'Imagen no Subida..';
+
+    if(req.files){
+        //separamos el nombre de la imagen 
+        var file_path = req.files.image.path;
+        var file_split = file_path.split('\\');
+        var file_name = file_split[2];
+
+        //extraemos la extension de la imagen
+        var ext_split = file_name.split('\.');
+        var file_ext = ext_split[1];
+        console.log(file_name);
+
+        if(file_ext == 'jpg' || file_ext == 'png' || file_ext == 'gif'){
+
+            Artist.findByIdAndUpdate(artistId,{image:file_name},(err,artistUpdate)=>{
+                if(err){
+                    res.status(500).send({message:'Error al actualizar la imagen del artista en el Servidor'})
+                }
+                else{
+                    if(!artistUpload){
+                        res.status(404).send({message:'imagen no actualizada del artista.'})
+                    }
+                    else{
+                        res.status(200).send({artist: artistUpdate});
+                    }
+                }
+            })
+        }
+        else{
+            res.status(200).send({message:'Extension del archivo no valida!.'});
+
+            //borramos el archivo en caso que no corresponda a la extension.
+            fs.unlinkSync(file_path);
+            console.log('successfully deleted',file_path);
+        }
+    }
+    else{
+        res.status(200).send({message:'No has subido ninguna imagen!..'});
+    }
+}
+
+function getImageFile(req,res){
+
+    var imageFile = req.params.imageFile;
+    var path_file = './uploads/artist/' + imageFile;
+
+    fs.exists(path_file,function(exist){
+
+        if(exist){
+
+            res.sendFile(path.resolve(path_file));
+        }
+        else{
+            res.status(404).send({message:'La imagen no Existe!..'});
+        }
+    })
+}
+
+
 module.exports ={
     getArtist,
     getArtistId,
     saveArtist,
     getArtists,
-    updateArtist
+    updateArtist,
+    deleteArtist,
+    uploadImagesArtist,
+    getImageFile
 }
