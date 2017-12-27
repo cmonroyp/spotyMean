@@ -121,7 +121,7 @@ function deleteArtist(req,res){
             }
             else{
                 //removemos los albunes asociados al artista.
-                Artist.find({artist:artistRemoved._id}).remove((err,albumRemoved)=>{
+                Album.find({artist:artistRemoved._id}).remove((err,albumRemoved)=>{
                     if(err){
                         res.status(500).send({message:'Error eliminando el album asociado al artista!.'});
                     }
