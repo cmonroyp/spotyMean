@@ -106,6 +106,8 @@ function updateUser(req,res){
                 res.status(404).send({message:'No se ha podido actualizar el Usuario'});
             }else{
                 res.status(200).send({user: userUpdated});
+                //si queremos mostrar son los datos actualizados
+                //res.status(200).send({user: update});
             }
         }
     })
@@ -133,7 +135,11 @@ function uploadImage(req,res){
                 if(!userUpdated){
                     res.status(404).send({message:'No se ha podido actualizar la imagen del Usuario'});
                 }else{
-                    res.status(200).send({user: userUpdated});
+                    res.status(200).send(
+                        {
+                            image: file_name,
+                            user: userUpdated
+                        });
                 }
             });
         }
