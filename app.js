@@ -10,8 +10,11 @@ var artist_routes = require('./routes/route-artist');
 var album_routes = require('./routes/route-album');
 var song_routes = require('./routes/route-song');
 
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());//convierte las peticiones http en json.
+app.use(bodyParser.urlencoded({limit: "50mb", extended: false, parameterLimit:50000}));
+app.use(bodyParser.json({limit: "50mb"}));
+
+//app.use(bodyParser.urlencoded({extended:false}));
+//app.use(bodyParser.json());//convierte las peticiones http en json.
 
 //Configurar cabeceras http
 
