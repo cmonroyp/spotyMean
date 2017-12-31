@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   public identity;//idintifica los datos del usuario logueado.
   public getToken;//es el que se pasa al servicio.
   public errorMessage;
-  public welcomeUser;
+  public saludoUser: string ="";;
 
   constructor(private _userService: UserService){
     this.inicializarVariables();
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
           //crear elemento en el localstorage para tener usuario en sesion.
           localStorage.setItem('identity',JSON.stringify(this.identity.user));
 
-          this.welcomeUser = this.identity.user.name;
+          this.saludoUser = this.identity.user.name;
 
           //conseguir token para enviarselo a cada peticion http.
           this._userService.signUp(this.user,'true').subscribe(
