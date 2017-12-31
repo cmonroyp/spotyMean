@@ -2,8 +2,27 @@
 <div *ngIf="identity" class="navigation col-lg-1">
   <h1>
     {{ title }}!
-  </h1>  
+  </h1>
 </div>
+
+<!-- <span class="btn btn-warning text-right">
+  <div>Cerrar Sesion</div> 
+</span> -->
+<div *ngIf="identity">
+
+  <div class="container">
+    <button class="btn btn-warning float-right" (click)="logout()">
+      Cerrar Sesion
+    </button>
+  </div>
+  
+    <span class="font-weight-bold text-left">
+       <div class="container text-uppercase"><a class="font-weight-normal text-capitalize">Welcome</a>
+            {{welcomeUser}}
+        </div>
+    </span>
+</div>
+
 <div class="clearfix"></div>
 <div *ngIf="identity" class="central col-lg-11">
   <p>Estas logueado en la aplicacion</p>

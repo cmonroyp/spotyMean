@@ -11,6 +11,8 @@ import { GLOBALENDPOINT } from './global';
 @Injectable()
 export class UserService {
 
+  public identity;
+  public token;
   public url: string;
 
   constructor(private _http:HttpClient) { 
@@ -35,5 +37,36 @@ export class UserService {
 
   }
 
+  getIdentity(){
+
+    let identity = JSON.parse(localStorage.getItem('identity'));
+
+    if(identity != 'undefined'){
+      this.identity = identity;//asigna un valor si existe en el localstorage.
+    }
+    else{
+      this.identity = null;
+    }
+
+    return this.identity;
+  }
+
+  getToken(){
+
+    let token = localStorage.getItem('token');
+    if(token != 'undefined'){
+      this.token = token;
+    }
+    else{
+      this.token = null;
+    }
+
+    return this.token;
+  }
  
+  removeToken(){
+    localStorage.removeItem('identity');
+    localStorage.removeItem('token');
+    localStorage.clear()
+  }
 }
