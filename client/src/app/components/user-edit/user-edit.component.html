@@ -1,0 +1,52 @@
+<div class="container" *ngIf="identity">
+
+  <div class="col-lg-6">
+      <h1>Actualizar Datos</h1>
+      <form #updateForm="ngForm" (ngSubmit)="onSubmit()"  class="col-md-10">
+          <p>
+            <label>Nombre:</label>
+            <input type="text" class="form-control" 
+            #name="ngModel"
+            name ="name"
+            [(ngModel)]="user.name"
+            required>
+            <span *ngIf="!name.valid && name.touched" class="text-warning">
+              El Nombre es obligatorio
+            </span>
+          </p>
+  
+          <p>
+            <label>Apellidos:</label>
+            <input type="text" class="form-control" 
+            #surname="ngModel"
+            name="surname"
+            [(ngModel)]="user.surname"
+            required>
+            <span *ngIf="!surname.valid && surname.touched" class="text-warning">
+              El Apellido es obligatorio
+            </span>
+          </p>
+  
+          <p>
+            <label>Correo Electronico:</label>
+            <input type="text" class="form-control" 
+            #email="ngModel"
+            name="email"
+            [(ngModel)]="user.email"
+            required>
+            <span *ngIf="!email.valid && email.touched" class="text-warning">
+              El email es obligatorio
+            </span>
+          </p>
+  
+          <input type="submit" value="Actualizar" class="btn btn-primary">
+  
+          <div *ngIf="updategister">
+            <div class="alert alert-danger" role="alert">
+              <strong></strong> {{updategister}}
+           </div>
+          </div>
+  
+        </form>
+    </div>
+</div>

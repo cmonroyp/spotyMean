@@ -8,24 +8,50 @@
 <!-- <span class="btn btn-warning text-right">
   <div>Cerrar Sesion</div> 
 </span> -->
-<div *ngIf="identity">
+<nav id="navigation" *ngIf="identity">
+    <a href="#">
+        <span class="fa fa-search" aria-hidden="true"></span>
+        Buscar
+    </a>
+    <a href="#">
+        <span class="fa fa-star" aria-hidden="true"></span>
+        Artistas
+    </a>
+    <a href="#">
+        <span class="fa fa-book" aria-hidden="true"></span>
+        Albums
+    </a>
+</nav>
 
-  <div class="container">
-    <button class="btn btn-warning float-right" (click)="logout()">
-      Cerrar Sesion
-    </button>
-  </div>
+<nav id="user_logged">
+
+  <div *ngIf="identity">
   
-    <span class="font-weight-bold text-left">
-       <div class="container text-uppercase"><a class="font-weight-normal text-capitalize">Welcome</a>
-            {{saludoUser}}
-        </div>
-    </span>
-</div>
+    <div class="container">
+      <button class="btn btn-warning float-right" (click)="logout()">
+        Cerrar Sesion
+      </button>
+    </div>
+    
+      <span class="font-weight-bold text-left">
+         <div class="container text-uppercase" id="identity_name">              
+              {{saludoUser}}
+          </div>
+      </span>
+      <div class="col-lg-6">
+
+        <a [routerLink]="['/mis-datos']">
+            <span class="fa fa-cog" aria-hidden="true"></span>
+            Mis datos
+        </a>
+      </div>
+  </div>
+</nav>
 
 <div class="clearfix"></div>
 <div *ngIf="identity" class="central col-lg-11">
   <p>Estas logueado en la aplicacion</p>
+  <router-outlet></router-outlet>
 </div>
 
 <!-- vista de logueo -->
@@ -65,28 +91,63 @@
   
     <div class="col-lg-6">
       <h1>Registrate</h1>
-      <form class="col-md-10">
+      <form #registerForm="ngForm" (ngSubmit)="onSubmitRegister();registerForm.reset()"  class="col-md-10">
           <p>
             <label>Nombre:</label>
-            <input type="text" class="form-control" required>
+            <input type="text" class="form-control" 
+            #name="ngModel"
+            name ="name"
+            [(ngModel)]="user_register.name"
+            required>
+            <span *ngIf="!name.valid && name.touched" class="text-warning">
+              El Nombre es obligatorio
+            </span>
           </p>
 
           <p>
             <label>Apellidos:</label>
-            <input type="text" class="form-control" required>
+            <input type="text" class="form-control" 
+            #surname="ngModel"
+            name="surname"
+            [(ngModel)]="user_register.surname"
+            required>
+            <span *ngIf="!surname.valid && surname.touched" class="text-warning">
+              El Apellido es obligatorio
+            </span>
           </p>
 
           <p>
             <label>Correo Electronico:</label>
-            <input type="text" class="form-control" required>
+            <input type="text" class="form-control" 
+            #email="ngModel"
+            name="email"
+            [(ngModel)]="user_register.email"
+            required>
+            <span *ngIf="!email.valid && email.touched" class="text-warning">
+              El email es obligatorio
+            </span>
           </p>
 
           <p>
             <label>Contraseña:</label>
-            <input type="password" class="form-control" required>
+            <input type="password" class="form-control" 
+            #password="ngModel"
+            name="password"
+            [(ngModel)]="user_register.password"
+            required>
+            <span *ngIf="!password.valid && password.touched" class="text-warning">
+              La contraseña es obligatoria
+            </span>
           </p>
   
           <input type="submit" value="Registrarse" class="btn btn-primary">
+
+          <div *ngIf="alertRegister">
+            <div class="alert alert-danger" role="alert">
+              <strong></strong> {{alertRegister}}
+           </div>
+          </div>
+
         </form>
     </div>
   </div>

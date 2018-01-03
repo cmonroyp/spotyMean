@@ -7,15 +7,25 @@ import { AppComponent } from './app.component';
 
 //Services
 import { UserService } from './services/user.service';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+
+//iconos
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
+//rutas 
+import { APP_ROUTING } from './app.routing';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AngularFontAwesomeModule,
+    APP_ROUTING
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

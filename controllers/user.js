@@ -95,8 +95,10 @@ function updateUser(req,res){
     var userId = req.params.id;
     var update = req.body;
 
-    console.log('userid:',userId);
-    console.log('update:',update);
+    if(userId != req.user.sub){
+        //Se compara el id del usuario con el que existe en el Token.
+      return  res.status(500).send({message:'No Autorizado para Actualizar datos.'});
+    }
     
     User.findByIdAndUpdate(userId,update,(err,userUpdated)=>{
         if(err){
