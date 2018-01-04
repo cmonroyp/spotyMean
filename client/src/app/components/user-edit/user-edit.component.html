@@ -39,6 +39,16 @@
             </span>
           </p>
   
+          <div class="image_for_edit" *ngIf="user.image && user.image != 'null'">
+            <img src="">
+          </div>
+
+          <p>
+            <label>Sube tu Foto:</label>
+            <input type="file" placeholder="subir imagen..."
+                    (change)="fileChangeEvent($event)">
+          </p>
+
           <input type="submit" value="Actualizar" class="btn btn-primary">
   
           <div *ngIf="updategister">
