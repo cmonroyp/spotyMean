@@ -1,14 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div *ngIf="identity" class="navigation col-lg-1">
-  <h1>
-    {{ title }}!
+
+  <h1 class="head-title">
+      <span class="fa fa-music" aria-hidden="true"></span>
+    <a [routerLink]="['/']">
+      {{ title }}!
+    </a>
   </h1>
-</div>
 
 <!-- <span class="btn btn-warning text-right">
   <div>Cerrar Sesion</div> 
 </span> -->
-<nav id="navigation" *ngIf="identity">
+<nav id="navigation">
     <a href="#">
         <span class="fa fa-search" aria-hidden="true"></span>
         Buscar
@@ -23,18 +26,39 @@
     </a>
 </nav>
 
-<nav id="user_logged">
+<nav id="user_logged">  
+  <div class="user_image">
+    <img id="image-logged" [src]="url + 'get-image-user/' + imageUser">
+  </div>
 
-  <div *ngIf="identity">
-  
+  <span class="identity_name">
+           {{saludoUser}}
+  </span>
+
+  <!-- <span class="btn btn-warning" (click)="logout()">
+      Cerrar Sesion
+  </span> -->
+
+  <a [routerLink]="['/mis-datos']">
+    <span class="fa fa-cog" aria-hidden="true"></span>
+    Mis datos
+  </a>
+
+  <a (click)="logout()" class="btn-logout">
+    <span class="fa fa-sign-out" aria-hidden="true"></span>
+    Salir
+  </a>
+
+
+  <!-- <div *ngIf="identity">  
     <div class="container">
       <button class="btn btn-warning float-right" (click)="logout()">
         Cerrar Sesion
       </button>
     </div>
-    
-      <span class="font-weight-bold text-left">
-         <div class="container text-uppercase" id="identity_name">              
+
+       <span class="font-weight-bold text-left">
+         <div class="container text-uppercase" id="identity_name">
               {{saludoUser}}
           </div>
       </span>
@@ -45,19 +69,19 @@
             Mis datos
         </a>
       </div>
-  </div>
+  </div> -->
 </nav>
 
-<div class="clearfix"></div>
-<div *ngIf="identity" class="central col-lg-11">
-  <p>Estas logueado en la aplicacion</p>
-  <router-outlet></router-outlet>
 </div>
+  <div *ngIf="identity" class="central col-lg-11">
+    <router-outlet></router-outlet>
+  </div>
+
 
 <!-- vista de logueo -->
 <div class="container">
 
-  <div class="row" *ngIf="!identity">
+  <div class="row col-lg-11" *ngIf="!identity">
     <div class="col-lg-6">
       <h1>Identificate</h1>
       <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7">

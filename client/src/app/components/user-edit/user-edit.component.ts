@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 //Service 
 import { UserService } from './../../services/user.service';
@@ -44,6 +44,7 @@ export class UserEditComponent implements OnInit {
           //this.user = resp['user'];
           localStorage.setItem('identity',JSON.stringify(this.user));
           document.getElementById('identity_name').innerHTML = this.user.name;//modificamos la variable de bienvenida
+
           //Valida si existe algun fichero para subir al servidor.
           if(!this.filesToUpload){
             //redireccion.
@@ -53,7 +54,11 @@ export class UserEditComponent implements OnInit {
                 .then((result:any)=>{
                   this.user.image = result.image;//esta respuesta la envia el metodo de la api image,user
                   localStorage.setItem('identity',JSON.stringify(this.user));
-                  console.log(this.user);
+                  
+                  //actualiza la imagen en el controlador principal app.component.html
+                  let image_path = this.url + 'get-image-user/' + this.user.image;
+                  document.getElementById('image-logged').setAttribute('src',image_path);
+                
                 })
           }
 

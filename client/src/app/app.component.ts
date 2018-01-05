@@ -3,7 +3,8 @@ import { User } from './models/user';
 
 //Service 
 import { UserService } from './services/user.service';
-
+//Url API 
+import { GLOBALENDPOINT } from './services/global';
 
 @Component({
   selector: 'app-root',
@@ -19,9 +20,12 @@ export class AppComponent implements OnInit {
   public errorMessage;
   public saludoUser;
   public alertRegister;
+  public url:string;
+  public imageUser;
 
   constructor(private _userService: UserService){
     this.inicializarVariables();
+    this.url = GLOBALENDPOINT.url;
   }
 
 
@@ -29,7 +33,9 @@ export class AppComponent implements OnInit {
     //si el usuario ya fue logueado simplemente se recoge la informacion del mismo.
     this.identity = this._userService.getIdentity();
     this.getToken = this._userService.getToken();
+
     this.saludoUser = this.identity.name;
+    this.imageUser = this.identity.image;
 
     console.log(this.identity);
     console.log(this.getToken);
@@ -52,7 +58,8 @@ export class AppComponent implements OnInit {
           //crear elemento en el localstorage para tener usuario en sesion.
           localStorage.setItem('identity',JSON.stringify(this.identity.user));
 
-          this.saludoUser = this.identity.user.name;
+          // this.saludoUser = this.identity.user.name;
+          // this.imageUser = this.identity.user.image;
 
           //conseguir token para enviarselo a cada peticion http.
           this._userService.signUp(this.user,true).subscribe(

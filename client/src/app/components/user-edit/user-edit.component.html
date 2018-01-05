@@ -1,4 +1,4 @@
-<div class="container" *ngIf="identity">
+<div *ngIf="identity">
 
   <div class="col-lg-6">
       <h1>Actualizar Datos</h1>
@@ -40,7 +40,7 @@
           </p>
   
           <div class="image_for_edit" *ngIf="user.image && user.image != 'null'">
-            <img src="">
+            <img [src]="url + 'get-image-user/' + user.image" style="width: 50px">
           </div>
 
           <p>
