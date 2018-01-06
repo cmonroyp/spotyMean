@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './models/user';
+import { Router } from '@angular/router';
 
+//model 
+import { User } from './models/user';
 //Service 
 import { UserService } from './services/user.service';
 //Url API 
@@ -23,7 +25,7 @@ export class AppComponent implements OnInit {
   public url:string;
   public imageUser;
 
-  constructor(private _userService: UserService){
+  constructor(private _userService: UserService,private _router:Router){
     this.inicializarVariables();
     this.url = GLOBALENDPOINT.url;
   }
@@ -34,11 +36,18 @@ export class AppComponent implements OnInit {
     this.identity = this._userService.getIdentity();
     this.getToken = this._userService.getToken();
 
-    this.saludoUser = this.identity.name;
-    this.imageUser = this.identity.image;
+    if(this.identity && this.getToken){
+      this.saludoUser = this.identity.name;
+      this.imageUser = this.identity.image;
 
-    console.log(this.identity);
-    console.log(this.getToken);
+      console.log('onInit appcomponetn',this.identity);
+      console.log('onInit appcomponetn',this.getToken);
+    }
+    // this.saludoUser = this.identity.name;
+    // this.imageUser = this.identity.image;
+
+    // console.log(this.identity);
+    // console.log(this.getToken);
   }
 
   onSubmit(){
@@ -58,8 +67,8 @@ export class AppComponent implements OnInit {
           //crear elemento en el localstorage para tener usuario en sesion.
           localStorage.setItem('identity',JSON.stringify(this.identity.user));
 
-          // this.saludoUser = this.identity.user.name;
-          // this.imageUser = this.identity.user.image;
+           this.saludoUser = this.identity.user.name;
+           this.imageUser = this.identity.user.image;
 
           //conseguir token para enviarselo a cada peticion http.
           this._userService.signUp(this.user,true).subscribe(
@@ -116,6 +125,8 @@ export class AppComponent implements OnInit {
     this._userService.removeToken();
     //con esto forzamos a redirigirse a la pantalla de logueo.    
     this.inicializarVariables();
+
+    this._router.navigate(['/']);//quitamos cualquier ruta visitada.
   }
 
   inicializarVariables(){

@@ -4,6 +4,7 @@ import { FormsModule} from '@angular/forms';//hacer databindings
 import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { ArtistListComponent } from './components/artist-list/artist-list.component';
 
 //Services
 import { UserService } from './services/user.service';
@@ -14,11 +15,16 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 //rutas 
 import { APP_ROUTING } from './app.routing';
+import { HomeComponent } from './components/home/home.component';
+import { ArtistAddComponent } from './components/artist-add/artist-add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserEditComponent
+    UserEditComponent,
+    ArtistListComponent,
+    HomeComponent,
+    ArtistAddComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<div class="row bodySpoty">
 <div *ngIf="identity" class="navigation col-lg-1">
 
   <h1 class="head-title">
@@ -16,7 +17,7 @@
         <span class="fa fa-search" aria-hidden="true"></span>
         Buscar
     </a>
-    <a href="#">
+    <a [routerLink]="['/artistas',1]" [routerLinkActive]="['actived']">
         <span class="fa fa-star" aria-hidden="true"></span>
         Artistas
     </a>
@@ -39,7 +40,7 @@
       Cerrar Sesion
   </span> -->
 
-  <a [routerLink]="['/mis-datos']">
+  <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']">
     <span class="fa fa-cog" aria-hidden="true"></span>
     Mis datos
   </a>
@@ -73,10 +74,11 @@
 </nav>
 
 </div>
-  <div *ngIf="identity" class="central col-lg-11">
+  <div [hidden]="!identity" class="central col-lg-10">
     <router-outlet></router-outlet>
   </div>
 
+</div>
 
 <!-- vista de logueo -->
 <div class="container">

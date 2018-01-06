@@ -1,6 +1,6 @@
-<div *ngIf="identity">
+<!-- <div *ngIf="identity"> -->
 
-  <div class="col-lg-6">
+  <div class="col-lg-6" *ngIf="identity">
       <h1>Actualizar Datos</h1>
       <form #updateForm="ngForm" (ngSubmit)="onSubmit()"  class="col-md-10">
           <p>
@@ -59,4 +59,4 @@
   
         </form>
     </div>
-</div>
+<!-- </div> -->
