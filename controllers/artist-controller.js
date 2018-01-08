@@ -79,7 +79,7 @@ function saveArtist(req,res){
                 res.status(404).send({message:'El artista no ha sido guradado!.'});
             }
             else{
-                res.status(200).send({artist: artistStored});
+                res.status(200).send({artist: artistStored,status:200});
             }
         }
     })

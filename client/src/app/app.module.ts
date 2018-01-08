@@ -5,10 +5,12 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ArtistListComponent } from './components/artist-list/artist-list.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 
 //Services
 import { UserService } from './services/user.service';
-import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { ArtistService } from './services/artist.service';
+import { UploadService } from './services/upload.service';
 
 //iconos
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -17,6 +19,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { APP_ROUTING } from './app.routing';
 import { HomeComponent } from './components/home/home.component';
 import { ArtistAddComponent } from './components/artist-add/artist-add.component';
+import { ArtistEditComponent } from './components/artist-edit/artist-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { ArtistAddComponent } from './components/artist-add/artist-add.component
     UserEditComponent,
     ArtistListComponent,
     HomeComponent,
-    ArtistAddComponent
+    ArtistAddComponent,
+    ArtistEditComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,7 @@ import { ArtistAddComponent } from './components/artist-add/artist-add.component
     AngularFontAwesomeModule,
     APP_ROUTING
   ],
-  providers: [UserService],
+  providers: [UserService,ArtistService,UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

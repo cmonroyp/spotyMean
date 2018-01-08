@@ -14,7 +14,6 @@ export class UserService {
   public identity;
   public token;
   public url: string;
-  public welcomeUser;
   //public gethash = false;
 
   constructor(private _http:HttpClient) { 
