@@ -26,7 +26,7 @@ export class ArtistListComponent implements OnInit {
   public url: string;
   public next_page;
   public prev_page;
-
+  public confirmado;
   constructor(private _route: ActivatedRoute,
               private _router: Router,
               private _userService: UserService,
@@ -79,7 +79,7 @@ export class ArtistListComponent implements OnInit {
     });
   }
 
-  public confirmado;
+  
   onDeleteConfirm(id: string){
     this.confirmado = id;
   }
