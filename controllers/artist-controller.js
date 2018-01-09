@@ -22,7 +22,7 @@ function getArtists(req,res){
     //     var page = 1;
     // }
     var page = req.params.page || 1;//en caso que no venga la pagina muestra la primera.
-    var itemPerPage = 3;//registros que se mostrara por pagina.
+    var itemPerPage = 4;//registros que se mostrara por pagina.
 
     Artist.find().sort('name').paginate(page,itemPerPage,function(err,artists,total){
 
@@ -101,7 +101,7 @@ function updateArtist(req,res){
                 res.status(404).send({message:'Artista no encontrado y no Actualizado!.'});
             }
             else{
-                res.status(200).send({artistUpdate:updateArtist});
+                res.status(200).send({artist:updateArtist});
             }
         }
     })
@@ -152,50 +152,86 @@ function deleteArtist(req,res){
     })
 }
 
-function uploadImagesArtist(req,res){
+function uploadImagesArtist(req, res){
+	var artistId = req.params.id;
+	var file_name = 'No subido...';
 
-    var artistId = req.params.id;
-    var file_name = 'Imagen no Subida..';
+	if(req.files){
+		var file_path = req.files.image.path;
+		var file_split = file_path.split('\\');
+		var file_name = file_split[2];
 
-    if(req.files){
-        //separamos el nombre de la imagen 
-        var file_path = req.files.image.path;
-        var file_split = file_path.split('\\');
-        var file_name = file_split[2];
+		var ext_split = file_name.split('\.');
+		var file_ext = ext_split[1];
 
-        //extraemos la extension de la imagen
-        var ext_split = file_name.split('\.');
-        var file_ext = ext_split[1];
-        console.log(file_name);
+		if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif'){
 
-        if(file_ext == 'jpg' || file_ext == 'png' || file_ext == 'gif'){
+			Artist.findByIdAndUpdate(artistId, {image: file_name}, (err, artistUpdated) => {
+				if(!artistId){
+					res.status(404).send({message: 'No se ha podido actualizar el usuario'});
+				}else{
+					res.status(200).send({artist: artistUpdated});
+				}
+			});
 
-            Artist.findByIdAndUpdate(artistId,{image:file_name},(err,artistUpdate)=>{
-                if(err){
-                    res.status(500).send({message:'Error al actualizar la imagen del artista en el Servidor'})
-                }
-                else{
-                    if(!artistUpload){
-                        res.status(404).send({message:'imagen no actualizada del artista.'})
-                    }
-                    else{
-                        res.status(200).send({artist: artistUpdate});
-                    }
-                }
-            })
-        }
-        else{
-            res.status(200).send({message:'Extension del archivo no valida!.'});
-
-            //borramos el archivo en caso que no corresponda a la extension.
-            fs.unlinkSync(file_path);
-            console.log('successfully deleted',file_path);
-        }
-    }
-    else{
-        res.status(200).send({message:'No has subido ninguna imagen!..'});
-    }
+		}else{
+			res.status(200).send({message: 'Extensión del archivo no valida'});
+		}
+		
+	}else{
+		res.status(200).send({message: 'No has subido ninguna imagen...'});
+	}
 }
+
+// function uploadImagesArtist(req,res){
+
+//     var artistId = req.params.id;
+//     var file_name = 'Imagen no Subida..';
+
+//     if(req.files){
+//         //separamos el nombre de la imagen 
+//         var file_path = req.files.image.path;
+//         var file_split = file_path.split('\\');
+//         var file_name = file_split[2];
+
+//         //extraemos la extension de la imagen
+//         var ext_split = file_name.split('\.');
+//         var file_ext = ext_split[1];
+//         console.log(file_name);
+
+//         if(file_ext == 'jpg' || file_ext == 'png' || file_ext == 'gif'){
+
+//             Artist.findByIdAndUpdate(artistId,{image:file_name},(err,artistUpdate)=>{
+//                 if(!artistId){
+// 					res.status(404).send({message: 'No se ha podido actualizar el usuario'});
+// 				}else{
+// 					res.status(200).send({artist: artistUpdated});
+// 				}
+//                 // if(err){
+//                 //     res.status(500).send({message:'Error al actualizar la imagen del artista en el Servidor'})
+//                 // }
+//                 // else{
+//                 //     if(!artistUpload){
+//                 //         res.status(404).send({message:'imagen no actualizada del artista.'})
+//                 //     }
+//                 //     else{
+//                 //         res.status(200).send({artist: artistUpdate});
+//                 //     }
+//                 // }
+//             })
+//         }
+//         else{
+//             res.status(200).send({message:'Extension del archivo no valida!.'});
+
+//             //borramos el archivo en caso que no corresponda a la extension.
+//             fs.unlinkSync(file_path);
+//             console.log('successfully deleted',file_path);
+//         }
+//     }
+//     else{
+//         res.status(200).send({message:'No has subido ninguna imagen!..'});
+//     }
+// }
 
 function getImageFile(req,res){
 

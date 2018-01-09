@@ -36,8 +36,8 @@ export class ArtistAddComponent implements OnInit {
                 this.titulo ='Crear nuevo artista'
                 this.url = GLOBALENDPOINT.url;
 
-    }
-
+              }
+              
   ngOnInit() {
     //recolectamos lo que este en el localestorage
     this.identity = this._userService.getIdentity();
@@ -55,7 +55,8 @@ export class ArtistAddComponent implements OnInit {
           if(resp.status == 200){
 
             this.messageArtist= 'Artista Creado Correctamente!.';
-           // this._router.navigate(['/editar-artista'],resp.artista._id);
+            this.artist = resp.artist;
+            this._router.navigate(['/editar-artista',resp.artist._id]);
           }
           else{
             this.errorArtist = 'Error al Crear al Artista!.';

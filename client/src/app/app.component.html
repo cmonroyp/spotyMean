@@ -9,9 +9,7 @@
     </a>
   </h1>
 
-<!-- <span class="btn btn-warning text-right">
-  <div>Cerrar Sesion</div> 
-</span> -->
+
 <nav id="navigation">
     <a href="#">
         <span class="fa fa-search" aria-hidden="true"></span>
@@ -36,10 +34,6 @@
            {{saludoUser}}
   </span>
 
-  <!-- <span class="btn btn-warning" (click)="logout()">
-      Cerrar Sesion
-  </span> -->
-
   <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']">
     <span class="fa fa-cog" aria-hidden="true"></span>
     Mis datos
@@ -50,31 +44,10 @@
     Salir
   </a>
 
-
-  <!-- <div *ngIf="identity">  
-    <div class="container">
-      <button class="btn btn-warning float-right" (click)="logout()">
-        Cerrar Sesion
-      </button>
-    </div>
-
-       <span class="font-weight-bold text-left">
-         <div class="container text-uppercase" id="identity_name">
-              {{saludoUser}}
-          </div>
-      </span>
-      <div class="col-lg-6">
-
-        <a [routerLink]="['/mis-datos']">
-            <span class="fa fa-cog" aria-hidden="true"></span>
-            Mis datos
-        </a>
-      </div>
-  </div> -->
 </nav>
 
 </div>
-  <div [hidden]="!identity" class="central col-lg-10">
+  <div [hidden]="!identity" class="central col-lg-11">
     <router-outlet></router-outlet>
   </div>
 
