@@ -7,6 +7,10 @@ import { ArtistListComponent } from './components/artist-list/artist-list.compon
 import { ArtistAddComponent } from './components/artist-add/artist-add.component';
 import { ArtistEditComponent } from './components/artist-edit/artist-edit.component';
 import { ArtistDetailComponent } from './components/artist-detail/artist-detail.component';
+import { AlbumAddComponent } from './components/album-add/album-add.component';
+import { AlbumEditComponent } from './components/album-edit/album-edit.component';
+import { AlbumDetailComponent } from './components/album-detail/album-detail.component';
+
 
 const app_routes: Routes = [
   //{ path: '',   pathMatch: 'full', redirectTo: '/home'},
@@ -15,6 +19,9 @@ const app_routes: Routes = [
   { path: 'artistas/:page', component: ArtistListComponent},
   { path: 'editar-artista/:id', component: ArtistEditComponent},
   { path: 'artista/:id', component: ArtistDetailComponent},
+  { path: 'crear-album/:artist', component: AlbumAddComponent},
+  { path: 'editar-album/:id', component: AlbumEditComponent},
+  { path: 'album/:id', component: AlbumDetailComponent},
   { path: 'crear-artista', component: ArtistAddComponent},
   { path: 'mis-datos', component: UserEditComponent },
   { path: '**', component: HomeComponent },

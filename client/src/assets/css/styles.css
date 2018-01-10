@@ -26,12 +26,21 @@ html, body {
     background: #222326;
     position: absolute;
     height: 40px;
+    margin-left: 10px;
 }
 
-.seguro-album{
+.seguro-album {
+    margin-top: -35px;
+    margin-left: 10px;
+}
+
+.buttons{
+    margin-left: 10px;
+}
+/* .seguro-album{
 	margin-top:-41px;
 	margin-left: 10px;
-}
+} */
 
 .seguro-song{
 	right: 10px;
@@ -39,6 +48,7 @@ html, body {
 	background: #eee;
 }
 
+/* Barra Lateral */
 .head-title{
     font-size: 20px;
     font-weight: bold;
@@ -172,6 +182,10 @@ html, body {
 	height: 100%;
 }
 
+.album-item .album-image img{
+    width: 100%;
+}
+
 .artist-item .artist-name,
 .album-item .album-name{
 	color: white;
@@ -182,6 +196,10 @@ html, body {
 .artist-item .artist-name a,
 .album-item .album-name a{
 	color: white;
+}
+
+.album-item{
+    height: 350px;
 }
 
 @media (min-width: 992px){

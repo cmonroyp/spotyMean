@@ -11,7 +11,8 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { UserService } from './services/user.service';
 import { ArtistService } from './services/artist.service';
 import { UploadService } from './services/upload.service';
-
+import { AlbumService } from './services/album.service';
+import { SongService } from './services/song.service';
 //iconos
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
@@ -21,6 +22,9 @@ import { HomeComponent } from './components/home/home.component';
 import { ArtistAddComponent } from './components/artist-add/artist-add.component';
 import { ArtistEditComponent } from './components/artist-edit/artist-edit.component';
 import { ArtistDetailComponent } from './components/artist-detail/artist-detail.component';
+import { AlbumAddComponent } from './components/album-add/album-add.component';
+import { AlbumEditComponent } from './components/album-edit/album-edit.component';
+import { AlbumDetailComponent } from './components/album-detail/album-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,10 @@ import { ArtistDetailComponent } from './components/artist-detail/artist-detail.
     HomeComponent,
     ArtistAddComponent,
     ArtistEditComponent,
-    ArtistDetailComponent
+    ArtistDetailComponent,
+    AlbumAddComponent,
+    AlbumEditComponent,
+    AlbumDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,7 @@ import { ArtistDetailComponent } from './components/artist-detail/artist-detail.
     AngularFontAwesomeModule,
     APP_ROUTING
   ],
-  providers: [UserService,ArtistService,UploadService],
+  providers: [UserService,ArtistService,UploadService,AlbumService,SongService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
