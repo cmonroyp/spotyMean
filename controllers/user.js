@@ -119,7 +119,7 @@ function uploadImage(req,res){
 
     var userId = req.params.id;
     var file_name = 'imagen no Subida!..';
-
+console.log('este es contorlerr api')
     if(req.files){
 
         var file_path = req.files.image.path;

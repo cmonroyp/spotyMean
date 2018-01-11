@@ -20,7 +20,7 @@
 			<li *ngFor="let song of songs" class="song-item">
 				<div class="title">
 					<a class="btn btn-success" (click)="startPlayer(song)">
-						<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+						<span class="fa fa-play" aria-hidden="true"></span>
 					</a>
 
 					{{song.number + '. '+ song.name + ' - '+ song.duration}}
@@ -35,7 +35,7 @@
 						</a>
 					</div>
 
-					<div class="seguro seguro-song" *ngIf="confirmado == song._id">
+					<div id="album-detail" class="seguro seguro-song" *ngIf="confirmado == song._id">
 						<a (click)="onDeleteSong(song._id)" class="btn btn-danger">
 							Eliminar
 						</a>

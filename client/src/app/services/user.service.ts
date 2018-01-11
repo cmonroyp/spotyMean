@@ -84,10 +84,12 @@ export class UserService {
     return this.token;
   }
  
-  removeToken(){
-    
+  removeToken(){       
+
+    //Sesion Usuario
     localStorage.removeItem('identity');
     localStorage.removeItem('token');
     //localStorage.clear()
+    
   }
 }
